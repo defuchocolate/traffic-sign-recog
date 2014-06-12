@@ -1,4 +1,4 @@
-function []=blob(x, y);
+function []=blob(x);
 %input must be a rgb image
 
 tic; % Start timer.
@@ -111,7 +111,7 @@ if strcmpi(reply, 'Yes')
         % Find the bounding box of each blob.
 		thisBlobsBoundingBox = blobMeasurements(k).BoundingBox;  % Get list of pixels in current blob.
 		% Extract out this coin into it's own image.
-		subImage = imcrop(y, thisBlobsBoundingBox);
+		subImage = imcrop(originalImage, thisBlobsBoundingBox);
 		% Display the image with informative caption.
 		count = count + 1;
         subplot(3, 4, count);
