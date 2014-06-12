@@ -4,7 +4,6 @@ clc;
 PSF = fspecial('gaussian',2,2);
 Blurred = imfilter(I,PSF,'symmetric','conv');
 
-
 luc1 = deconvlucy(Blurred,PSF,2);
 figure();
 subplot(131);imshow(I);

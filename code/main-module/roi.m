@@ -1,6 +1,8 @@
+function [out_red, out_blue] = roi(x)
+
 clc;
 clear all;
-img=imread('D:\project-images\test2.jpg');
+img = x(:,:);
 
 img1 = rgb2ycbcr(img);
 
@@ -64,6 +66,9 @@ subplot(122);imshow(finr);title('region of interest dilated and eroded red');
 
 fin_red = cat(3,finr,finr,finr);
 fin_blue = cat(3,finb,finb,finb);
+
+out_red = fin_red;
+out_blue = fin_blue;
 
 if(size(fin_red)~=0)
     blob(fin_red);
