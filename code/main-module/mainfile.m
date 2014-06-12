@@ -8,3 +8,5 @@ figure;
 
 subplot(1,2,1),imshow(red_comp), title('Red component');
 subplot(1,2,2), imshow(blue_comp), title('Blue component');
+
+detectblob(red_comp, blue_comp);

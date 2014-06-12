@@ -1,4 +1,4 @@
-function []=blob(x);
+function []=blob(x)
 %input must be a rgb image
 
 tic; % Start timer.
@@ -16,7 +16,6 @@ caption = sprintf('Original image.');
 title(caption);
 axis square; % Make sure image is not artificially stretched because of screen's aspect ratio.
 
-
 % Threshold the image to get a binary image (only 0's and 1's) of class "logical."
 % Method #1: using im2bw()
 %   normalizedThresholdValue = 0.4; % In range 0 to 1.
@@ -29,9 +28,6 @@ binaryImage = originalImage > thresholdValue; % Bright objects will be the chose
 
 % Do a "hole fill" to get rid of any background pixels inside the blobs.
 binaryImage = imfill(binaryImage, 'holes');
-
-
-
 
 % Display the binary image.
 subplot(3, 3, 3); imagesc(binaryImage); colormap(gray(256)); title('Binary Image, obtained by thresholding'); axis square;
@@ -128,5 +124,4 @@ if strcmpi(reply, 'Yes')
             title(caption, 'FontSize', 14);
         end
     end
-    
 end
