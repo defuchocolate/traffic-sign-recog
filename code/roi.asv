@@ -37,12 +37,6 @@ H = [255];
 roib = roifilt2(H, blue_comp, blue_comp_bin);
 roir = roifilt2(H, red_comp, red_comp_bin);
 
-roib(roib > blue_thresh) = 255;
-roib(roib < blue_thresh) = 0;
-
-roir(roir > red_thresh) = 255;
-roir(roir < red_thresh) = 0;
-
 % Displaying all the images
 
 figure();imshow(img);title('original image');
@@ -54,21 +48,19 @@ subplot(224);imshow(red_comp_bin,[]);title('threshold red plane');
 figure();
 subplot(121);imshow(roib);title('region of interest blue');
 subplot(122);imshow(roir);title('region of interest red');
-
 finr=dilero(roir);
 finb=dilero(roib);
-
 figure();
 subplot(121);imshow(finb);title('region of interest dilated and eroded blue');
 subplot(122);imshow(finr);title('region of interest dilated and eroded red');
 
-fin_red = cat(3,finr,finr,finr);
-fin_blue = cat(3,finb,finb,finb);
+fin1=cat(3,finr,finr,finr);
+fin2=cat(3,finb,finb,finb);
 
-if(size(fin_red)~=0)
-    blob(fin_red);
+if(size(fin1)~=0)
+    blob(fin1);
 end
 
-if(size(fin_blue)~=0)
-    blob(fin_blue);
+if(size(fin2)~=0)
+    blob(fin2);
 end

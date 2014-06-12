@@ -1,9 +1,9 @@
-function []=blob();
+function []=blob(x);
+%input must be a rgb image
 
 tic; % Start timer.
 
 % Read in standard MATLAB demo image
-x=imread('tempo.jpg');
 x=rgb2gray(x);
 originalImage = x;
 subplot(3, 3, 1);
@@ -23,12 +23,13 @@ axis square; % Make sure image is not artificially stretched because of screen's
 %   thresholdValue = normalizedThresholdValue * max(max(originalImage)); % Gray Levels.
 %   binaryImage = im2bw(originalImage, normalizedThresholdValue);       % One way to threshold to binary
 % Method #2: using a logical operation.
-  thresholdValue = 100;
+  thresholdValue = 254;
   binaryImage = originalImage > thresholdValue; % Bright objects will be the chosen if you use >.
 %   binaryImage = originalImage < thresholdValue; % Dark objects will be the chosen if you use <.
 
 % Do a "hole fill" to get rid of any background pixels inside the blobs.
 binaryImage = imfill(binaryImage, 'holes');
+
 
 
 
@@ -99,7 +100,7 @@ elapsedTime = toc;
 % Alert user that the demo is done and give them the option to save an image.
 message = sprintf('Finished running BlobsDemo.m.\n\nElapsed time = %.2f seconds.', elapsedTime);
 	
-message = sprintf('Would you like to crop out each coin to individual images?');
+message = sprintf('Would you like to crop out each blob to individual images?');
 reply = questdlg(message, 'Extract Individual Images?', 'Yes', 'No', 'Yes');
 % Note: reply will = '' for Upper right X, 'Yes' for Yes, and 'No' for No.
 if strcmpi(reply, 'Yes')
@@ -107,16 +108,20 @@ if strcmpi(reply, 'Yes')
 	% Maximize the figure window.
 	set(gcf, 'Position', get(0, 'ScreenSize'));
 	for k = 1 : numberOfBlobs           % Loop through all blobs.
-		% Find the bounding box of each blob.
+		blobArea = blobMeasurements(k).Area;
+        if(blobArea>10)
+        % Find the bounding box of each blob.
 		thisBlobsBoundingBox = blobMeasurements(k).BoundingBox;  % Get list of pixels in current blob.
 		% Extract out this coin into it's own image.
 		subImage = imcrop(originalImage, thisBlobsBoundingBox);
 		% Display the image with informative caption.
 		subplot(3, 4, k);
 		imshow(subImage);
-		caption = sprintf('BLOB #%d\nDiameter = %.1f pixels\nArea = %d pixels', k, blobECD(k), blobMeasurements(k).Area);
+        [r1 c1]=size(subImage);
+		caption = sprintf('BLOB #%d length=%d breadth=%d', k,r1,c1);
 		title(caption, 'FontSize', 14);
-	end
+        end
+    end
 
 end
 
