@@ -47,7 +47,7 @@ roir(roir < red_thresh) = 0;
 finr=dilero(roir);
 finb=dilero(roib);
 
-reply = questdlg('Display all the ROI related figures?', 'Query');
+reply = askuser('Display all the ROI related figures?', 'Query');
 if(strcmpi(reply, 'Yes'))
     % Displaying all the images
     
