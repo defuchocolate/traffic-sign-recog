@@ -1,6 +1,6 @@
 clc;
 clear all;
-img=imread('D:\project-images\test1.jpg');
+img=imread('D:\project-images\test2.jpg');
 
 img1 = rgb2ycbcr(img);
 
