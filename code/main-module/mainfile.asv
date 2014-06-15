@@ -12,17 +12,23 @@ input = imread('D:\project-images\test5.jpg');
 [numRed, blobsRed, shapesRed] = blob(red_comp, input);
 [numBlue, blobsBlue, shapesBlue] = blob(blue_comp, input);
 
-message = sprintf('Blobs from \nRed: %d\nBlue: %d', numRed, numBlue);
-questdlg(message, 'Information');
+mesage = 
+askuser(message, 'Information');
 
 if(numRed == 1 && numBlue == 1)
-    figure, imshow(blobsRed), title('Extracted from Red');
-    figure, imshow(blobsBlue), title('Extracted from Blue');
-elseif(numRed == 1)
+    figure;
+    imshow(blobsRed);
+    figure;
+    imshow(blobsBlue);
+end
+
+if(numRed == 1)
     figure, imshow(blobsRed), title('Extracted from Red');
 elseif(numBlue == 1)
     figure, imshow(blobsBlue), title('Extracted from Blue');
-elseif(numBlue > 4)
+end
+
+if(numBlue > 4)
     % Red is important
     imshow(blobsRed);
 elseif(numRed > 4)
