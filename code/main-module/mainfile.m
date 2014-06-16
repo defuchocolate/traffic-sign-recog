@@ -4,7 +4,7 @@ close all;
 
 % cd 'D:\project-images\signs';
 
-input = imread('D:\art1.png');
+input = imread('D:\signs-prob\cross14.jpg');
 
 % input = lucyrich(input);
 
@@ -25,8 +25,10 @@ if(numRed == 1 && numBlue == 1)
     figure, imshow(blobsBlue), title('Extracted from Blue');
 elseif(numRed == 1)
     figure, imshow(blobsRed), title('Extracted from Red');
+    extracted = blobsRed;
 elseif(numBlue == 1)
     figure, imshow(blobsBlue), title('Extracted from Blue');
+    extracted = blobsBlue;
 elseif(numBlue > 4)
     % Red is important
     [p q r] = size(blobsRed);
@@ -46,3 +48,4 @@ elseif(numRed > 4)
         end
     end
 end
+

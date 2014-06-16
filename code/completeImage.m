@@ -7,7 +7,7 @@ clc;
 clear all;
 close all;
 
-y = imread('D:\art1.png');
+y = imread('D:\signs-prob\cross14.jpg');
 
 x = y;
 
@@ -20,7 +20,7 @@ originalImage = x;
 thresholdValue = 60;
 binaryImage = originalImage < thresholdValue;
 
-se = strel('line', 60, 90);
+se = strel('line', 10, 90);
 dilated = imdilate(binaryImage, se, 5000);
 
 imshow(dilated);
