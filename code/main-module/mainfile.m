@@ -1,7 +1,12 @@
 clc;
 clear all;
+close all;
 
-input = imread('D:\project-images\test5.jpg');
+% cd 'D:\project-images\signs';
+
+input = imread('D:\art1.png');
+
+% input = lucyrich(input);
 
 [red_comp, blue_comp] = roi(input);
 
@@ -24,8 +29,20 @@ elseif(numBlue == 1)
     figure, imshow(blobsBlue), title('Extracted from Blue');
 elseif(numBlue > 4)
     % Red is important
-    imshow(blobsRed);
+    [p q r] = size(blobsRed);
+    for i=1:3:r;
+        temp = blobsRed(:, :, i:i+2);
+        figure, imshow(temp);
+    end
 elseif(numRed > 4)
     % Blue is important
-    imshow(blobsBlue);
+    [p q r] = size(blobsBlue);
+    for i=1:3:r;
+        try
+            temp = blobsBlue(:, :, i:i+2);
+        end
+        try
+            figure, imshow(temp);
+        end
+    end
 end

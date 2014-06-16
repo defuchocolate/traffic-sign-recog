@@ -1,7 +1,7 @@
 function [totBlobs, finBlobs, shapesFinal]=blob(x, y);
-%input must be a rgb image
+% input must be a rgb image
 
-showAll = 0;
+showAll = 1;
 % 1 - Show all windows
 % 0 - Show no windows
 
@@ -144,7 +144,9 @@ if strcmpi(reply, 'Yes')
             totBlobs = totBlobs + 1;
             
             if(numberOfBlobs < 8)
-                finBlobs = [finBlobs, subImage];
+                try
+                    finBlobs = [finBlobs, subImage];
+                end
             end
             
             % Display the image with informative caption.
