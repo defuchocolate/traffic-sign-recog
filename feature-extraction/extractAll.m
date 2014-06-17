@@ -34,3 +34,5 @@ for i=1:p;
     
     output = horzcat(output, outfeat);    
 end
+
+target = [1 1 1 1 1 0 0 0 0; 0 0 0 0 0 1 1 1 1];

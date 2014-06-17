@@ -128,7 +128,7 @@ reply = 'Yes';
 if strcmpi(reply, 'Yes')
     
     if(showAll)
-        figure;        
+        figure;
         % Maximize the figure window.
         set(gcf, 'Position', get(0, 'ScreenSize'));
     end
@@ -144,9 +144,11 @@ if strcmpi(reply, 'Yes')
             totBlobs = totBlobs + 1;
             
             if(numberOfBlobs < 8)
-                try
-                    finBlobs = [finBlobs, subImage];
-                end
+                
+                finBlobs = horzcat(finBlobs, subImage);
+                %  try
+                %  finBlobs = [finBlobs, subImage];
+                %  end
             end
             
             % Display the image with informative caption.
@@ -160,7 +162,8 @@ if strcmpi(reply, 'Yes')
             [r1 c1]=size(subImage);
             rate = 0;
             rate = shape(subImage);
-            shapesFinal = [shapesFinal, rate];
+            shapesFinal = horzcat(shapesFinal, rate);
+%             shapesFinal = [shapesFinal, rate];
             caption = sprintf('BLOB #%d length=%d breadth=%d \n shape=%d', k,r1,c1,rate);
             title(caption, 'FontSize', 10);
         end
