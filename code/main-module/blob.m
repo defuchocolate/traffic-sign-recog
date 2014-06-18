@@ -32,8 +32,8 @@ end
 %   thresholdValue = normalizedThresholdValue * max(max(originalImage)); % Gray Levels.
 %   binaryImage = im2bw(originalImage, normalizedThresholdValue);       % One way to threshold to binary
 % Method #2: using a logical operation.
-thresholdValue = 254;
-binaryImage = originalImage > thresholdValue; % Bright objects will be the chosen if you use >.
+thresholdValue = 60;
+binaryImage = originalImage < thresholdValue; % Bright objects will be the chosen if you use >.
 %   binaryImage = originalImage < thresholdValue; % Dark objects will be the chosen if you use <.
 
 % Do a "hole fill" to get rid of any background pixels inside the blobs.
@@ -135,7 +135,7 @@ if strcmpi(reply, 'Yes')
     count=0;
     for k = 1 : numberOfBlobs           % Loop through all blobs.
         blobArea = blobMeasurements(k).Area;
-        if(blobArea>1000)
+        if(blobArea>10)
             % Find the bounding box of each blob.
             thisBlobsBoundingBox = blobMeasurements(k).BoundingBox;  % Get list of pixels in current blob.
             % Extract out this coin into it's own image.

@@ -4,7 +4,7 @@ close all;
 
 % cd 'D:\project-images\signs';
 
-input = imread('D:\project-images\test1.jpg');
+input = imread('D:\project-images-test\tester1.jpg');
 
 % input = lucyrich(input);
 
