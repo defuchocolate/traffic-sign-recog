@@ -1,4 +1,4 @@
-function[features] = extractFeaturesFunc(input);
+function[features] = extractFeaturesFunc(input)
 
 resized = imresize(input, [25 25]);
 
