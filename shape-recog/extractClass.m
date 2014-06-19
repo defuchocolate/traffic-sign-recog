@@ -1,5 +1,5 @@
 clc;
-clear all;
+% clear all;
 close all;
 
 files = dir('D:\matlab\project\shape-recog\shapeTestingCircle\*.jpg');
@@ -116,5 +116,5 @@ target = horzcat(target1, target2, target3);
 
 % Construct the sample
 % The sample is circular and thus should have class 1
-sampler = imread('D:\matlab\project\shape-recog\shapeTestingTriangle2\narrow_bridge.jpg');
-sampler3 = extractFeaturesFunc(sampler);
+% sampler = imread('D:\matlab\project\shape-recog\shapeTestingTriangle2\narrow_bridge.jpg');
+% sampler3 = extractFeaturesFunc(sampler);

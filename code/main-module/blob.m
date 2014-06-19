@@ -1,4 +1,4 @@
-function [totBlobs, finBlobs, shapesFinal]=blob(x, y);
+function [totBlobs, finBlobs, shapesFinal]=blob(x, y)
 % input must be a rgb image
 
 showAll = 1;
@@ -135,35 +135,45 @@ if strcmpi(reply, 'Yes')
     count=0;
     for k = 1 : numberOfBlobs           % Loop through all blobs.
         blobArea = blobMeasurements(k).Area;
-        if(blobArea>10)
+        if(blobArea>1000)
             % Find the bounding box of each blob.
             thisBlobsBoundingBox = blobMeasurements(k).BoundingBox;  % Get list of pixels in current blob.
             % Extract out this coin into it's own image.
             subImage = imcrop(y, thisBlobsBoundingBox);
             
-            totBlobs = totBlobs + 1;
+            totBlobs = totBlobs + 1;      
             
-            if(numberOfBlobs < 8)
-                
+            try
+                subImage = imresize(subImage, [100 100]);
                 finBlobs = horzcat(finBlobs, subImage);
-                %  try
-                %  finBlobs = [finBlobs, subImage];
-                %  end
-            end
+            catch me
+                disp(size(finBlobs));
+                disp(size(subImage));
+            end 
+            %  try
+            %  finBlobs = [finBlobs, subImage];
+            %  end
+            %             end
             
             % Display the image with informative caption.
             count = count + 1;
+            disp(count);
             
             if(showAll)
+                disp(count);
                 subplot(3, 4, count);
                 imshow(subImage);
+                if(count > 11)
+                    figure;
+                    count = 1;
+                end
             end
             
             [r1 c1]=size(subImage);
             rate = 0;
             rate = shape(subImage);
             shapesFinal = horzcat(shapesFinal, rate);
-%             shapesFinal = [shapesFinal, rate];
+            %             shapesFinal = [shapesFinal, rate];
             caption = sprintf('BLOB #%d length=%d breadth=%d \n shape=%d', k,r1,c1,rate);
             title(caption, 'FontSize', 10);
         end

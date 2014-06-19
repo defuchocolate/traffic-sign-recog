@@ -1,7 +1,7 @@
-function [totBlobs, finBlobs, shapesFinal]=blob(x, y);
-%input must be a rgb image
+function [totBlobs, finBlobs, shapesFinal]=blob(x, y)
+% input must be a rgb image
 
-showAll = 0;
+showAll = 1;
 % 1 - Show all windows
 % 0 - Show no windows
 
@@ -32,8 +32,8 @@ end
 %   thresholdValue = normalizedThresholdValue * max(max(originalImage)); % Gray Levels.
 %   binaryImage = im2bw(originalImage, normalizedThresholdValue);       % One way to threshold to binary
 % Method #2: using a logical operation.
-thresholdValue = 254;
-binaryImage = originalImage > thresholdValue; % Bright objects will be the chosen if you use >.
+thresholdValue = 60;
+binaryImage = originalImage < thresholdValue; % Bright objects will be the chosen if you use >.
 %   binaryImage = originalImage < thresholdValue; % Dark objects will be the chosen if you use <.
 
 % Do a "hole fill" to get rid of any background pixels inside the blobs.
@@ -126,10 +126,13 @@ reply = 'Yes';
 
 % Note: reply will = '' for Upper right X, 'Yes' for Yes, and 'No' for No.
 if strcmpi(reply, 'Yes')
-    figure;
+    
+    if(showAll)
+        figure;
+        % Maximize the figure window.
+        set(gcf, 'Position', get(0, 'ScreenSize'));
+    end
     count=0;
-    % Maximize the figure window.
-    set(gcf, 'Position', get(0, 'ScreenSize'));
     for k = 1 : numberOfBlobs           % Loop through all blobs.
         blobArea = blobMeasurements(k).Area;
         if(blobArea>1000)
@@ -141,21 +144,32 @@ if strcmpi(reply, 'Yes')
             totBlobs = totBlobs + 1;
             
             if(numberOfBlobs < 8)
-                finBlobs = [finBlobs, subImage];
+                
+                finBlobs = horzcat(finBlobs, subImage);
+                %  try
+                %  finBlobs = [finBlobs, subImage];
+                %  end
             end
             
             % Display the image with informative caption.
             count = count + 1;
+            disp(count);
             
             if(showAll)
+                disp(count);
                 subplot(3, 4, count);
                 imshow(subImage);
+                if(count > 11)
+                    figure;
+                    count = 1;
+                end
             end
             
             [r1 c1]=size(subImage);
             rate = 0;
             rate = shape(subImage);
-            shapesFinal = [shapesFinal, rate];
+            shapesFinal = horzcat(shapesFinal, rate);
+            %             shapesFinal = [shapesFinal, rate];
             caption = sprintf('BLOB #%d length=%d breadth=%d \n shape=%d', k,r1,c1,rate);
             title(caption, 'FontSize', 10);
         end
