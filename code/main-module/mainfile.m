@@ -4,7 +4,14 @@ close all;
 
 % cd 'D:\project-images\signs';
 
-input = imread('D:\project-images-test\tester5.jpg');
+input = imread('D:\project-images-test\tester3.jpg');
+
+% Code for applying Motion blur to the image
+% LEN = 10;
+% THETA = 0;
+% PSF = fspecial('motion',LEN,THETA);
+% 
+% input = imfilter(input, PSF, 'circular', 'conv');
 
 % input = lucyrich(input);
 
