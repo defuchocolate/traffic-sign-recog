@@ -27,7 +27,7 @@ for i=1:p;
     
     outfeat = extractFeaturesFunc(resized);
     
-    output1 = horzcat(output1, outfeat);    
+    output1 = horzcat(output1, outfeat);
 end
 
 files = dir('D:\matlab\project\shape-recog\shapeTestingCircle2\*.jpg');
@@ -46,13 +46,13 @@ for i=1:p;
     
     input = imread(nm);
     
-    input = edge(rgb2gray(input));    
+    input = edge(rgb2gray(input));
     
     resized = imresize(input, [size_im size_im]);
     
     outfeat = extractFeaturesFunc(resized);
     
-    output2 = horzcat(output2, outfeat);    
+    output2 = horzcat(output2, outfeat);
 end
 
 files = dir('D:\matlab\project\shape-recog\shapeTestingTriangle\*.jpg');
@@ -77,7 +77,7 @@ for i=1:p;
     
     outfeat = extractFeaturesFunc(resized);
     
-    output3 = horzcat(output3, outfeat);    
+    output3 = horzcat(output3, outfeat);
 end
 
 % Construct the target vector
@@ -97,3 +97,35 @@ target = horzcat(target1, target2, target3);
 % The sample is circular and thus should have class 1
 % sampler = imread('D:\matlab\project\shape-recog\shapeTestingTriangle2\narrow_bridge.jpg');
 % sampler3 = extractFeaturesFunc(sampler);
+
+
+clc;
+%First try a simple one – feedforward (multilayer perceptron) network
+net=newff([0 2], [5,1], {'tansig','purelin'},'traingd');
+% Here newff defines feedforward network architecture.
+
+% The first argument [0 2] defines the range of the input and initializes the network parameters.
+% The second argument the structure of the network. There are two layers.
+% 5 is the number of the nodes in the first hidden layer,
+% 1 is the number of nodes in the output layer,
+% Next the activation functions in the layers are defined.
+% In the first hidden layer there are 5 tansig functions.
+% In the output layer there is 1 linear function.
+% ‘learngd’ defines the basic learning scheme – gradient method
+% Define learning parameters
+net.trainParam.show = 50; % The result is shown at every 50th iteration (epoch)
+net.trainParam.lr = 0.05; % Learning rate used in some gradient schemes
+net.trainParam.epochs =1000; % Max number of iterations
+net.trainParam.goal = 1e-3; % Error tolerance; stopping criterion
+%Train network
+
+[p q] = size(output);
+
+i = 1;
+
+% for i=1:p;
+    temp = output(:, i).';
+    temp_tar = target(:, i).';
+    temp_tar = horzcat(temp_tar, zeros([1 22]));
+    net1 = train(net, temp, temp_tar); % Iterates gradient type of loop
+% end
