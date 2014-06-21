@@ -1,3 +1,4 @@
+function[output, target] = extractClass()
 clc;
 % clear all;
 close all;
@@ -98,4 +99,4 @@ target = horzcat(target1, target2, target3);
 % sampler = imread('D:\matlab\project\shape-recog\shapeTestingTriangle2\narrow_bridge.jpg');
 % sampler3 = extractFeaturesFunc(sampler);
 
-net = create_net(output, target);
+% net = create_net(output, target);
