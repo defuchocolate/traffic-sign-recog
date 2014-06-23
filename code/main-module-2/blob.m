@@ -1,7 +1,7 @@
 function [totBlobs, finBlobs, shapesFinal]=blob(x, y)
 % input must be a rgb image
 
-showAll = 1;
+showAll = 0;
 % 1 - Show all windows
 % 0 - Show no windows
 

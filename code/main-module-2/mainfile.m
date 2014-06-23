@@ -8,7 +8,7 @@ tic;
 
 net = create_net(output, target);
 
-input = imread('D:\project-images-test\test1.jpg');
+input = imread('D:\matlab\project\real-images\real-images\real-images-1-kandigai\IMG_20140623_120024.jpg');
 
 [red_comp, blue_comp] = roi(input);
 
@@ -88,8 +88,7 @@ for i=1:100:t-100+1;
     if(count > 12)        
         figure;
         count = 1;
-    end
-    
+    end    
 end
 
 elapsedTime = toc;
