@@ -1,5 +1,20 @@
 function[features] = extractFeaturesFunc(input)
 
+try
+    input = rgb2gray(input)
+end
+
+% try
+%     input = edge(input);
+% catch me
+%     [p q r] = size(input);
+%     if r == 3
+%         input = edge(rgb2gray(input));
+%     else
+%         disp('Error');        
+%     end
+%     
+% end
 sep = 20;
 size_im = 100;
 

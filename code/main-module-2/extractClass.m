@@ -22,7 +22,7 @@ for i=1:p;
     
     input = imread(nm);
     
-    input = edge(rgb2gray(input));
+    input = rgb2gray(input);
     
     resized = imresize(input, [size_im size_im]);
     
